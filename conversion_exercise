@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+int main ()
+{
+    char a;
+    float kms, miles, inches, feet, cm, pounds, kgs, meters;
+    printf("q: Quit\n 1: kmsToMiles\n 2: inchesToFeet\n 3: feetTocm\n 4: poundstoKgs\n 5: metersToKms\n");
+    scanf("%c", &a);
+    if (a== 'q')
+    {
+        goto end;
+    }
+
+
+    float kmsToMiles = 0.621;
+    float inchesToFeet = 12;
+    float feetTocm = 30.48;
+    float poundstoKgs = 0.454;
+    float metersToKms = 0.001;
+
+    int choice;
+    printf("Value\n");
+    scanf("%d", &choice);
+    switch (choice)
+    {
+        case 1:
+        printf("The value in miles is %f \n", kmsToMiles);
+        break;
+
+        case 2:
+        printf("The value in feet is %f\n", inchesToFeet);
+        break;
+
+        case 3:
+        printf("The value in cm is %f\n", feetTocm);
+        break;
+
+        case 4:
+        printf("The value in Kgs is %f\n", poundstoKgs);
+        break;
+
+        case 5:
+        printf("The value in Kms is %f\n", metersToKms);
+        break;
+
+        case 'q':
+        goto end;
+        break;
+
+        default:
+        break;
+    }
+
+    end:
+return 0;
+}
