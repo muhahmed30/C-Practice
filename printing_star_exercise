@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+// Author: Muhammad Ahmed
+// Purpose: Printing a star given user input
+
+
+//Function
+void starPattern(int rows);
+void reversestarPattern(int rows);
+
+int main ()
+
+{
+
+//Variable declaration
+int rows, type;
+
+//Input from user
+printf("Enter 1 for normal star\nEnter 2 for reverse star\n");
+scanf("%d", &type);
+printf("Enter number for star \n");
+scanf("%d", &rows);
+
+//Logic
+switch (type)
+{
+    case (1):
+    {
+        starPattern(rows);
+        break;
+    }
+
+    case (2):
+    {
+        reversestarPattern(rows);
+        break;
+    }
+
+    default:
+    printf("Try again\n");
+    break;
+}
+
+
+    return 0;
+}
+
+int i, j;
+void starPattern(int rows)
+{
+    for (i =0; i<rows; i++)
+    {
+        for (j=0; j<=i; j++)
+        {
+            printf("*");
+        }
+
+        printf("\n");
+    }
+}
+
+void reversestarPattern(int rows)
+{
+    for (i =0; i<rows; i++)
+    {
+        for (j=0; j< rows-i; j++)
+        {
+            printf("*");
+        }
+
+        printf("\n");
+    }
+}
