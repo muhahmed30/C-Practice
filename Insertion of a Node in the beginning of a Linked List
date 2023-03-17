@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Insertion of a Node in the beginning of a Linked List
+
+int main ()
+{
+
+//Making a Stucture
+    struct node
+    {
+        int data;
+        struct node *next;
+    };
+
+//Declaring all pointers and int
+    struct node *head, *newnode, *temp;
+    head=0;
+    int choice=1;
+
+//While loop to ask user to enter data and assigning data
+    while(choice)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the data \n");
+        scanf("%d",&newnode->data);
+        newnode->next=0;
+
+        if(head==0)
+        {
+            head=temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Do you want to continue(0,1)?\n");
+        scanf("%d",&choice);
+    }
+
+//Printing Data
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d \n",temp->data);
+        temp=temp->next;
+    }
+
+//Adding Data to the beginning of linked list
+
+    struct node *begnode;
+    begnode=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the element \n");
+    scanf("%d",&begnode->data);
+    begnode->next=head;
+    head=begnode;
+
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d \n",temp->data);
+        temp=temp->next;
+    }
+}
