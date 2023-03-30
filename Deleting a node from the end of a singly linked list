@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Deleting a node from the end of a singly linked list
+
+//Stating what a struct node contains
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+//Declaring temp and head as global variables
+struct node *temp, *head;
+
+//Function Declaration
+void display();
+void delend();
+
+//Main Program
+int main()
+{
+    struct node *newnode;
+    int choice=1, count=0;
+    temp=0;
+    head=0;
+
+    while(choice)
+    {
+        newnode= (struct node*) malloc(sizeof(struct node));
+        printf("Enter data \n");
+        scanf("%d", &newnode->data);
+
+        if (head==0)
+        {
+            head=temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Do you want to continue?\n");
+        scanf("%d", &choice);
+    }
+
+    //Calling the display function
+    display();
+
+    int a;
+    printf("Do you want to delete the last node? (1) \n");
+    scanf("%d", &a);
+
+    if (a==1)
+    {
+        delend();
+        display(); 
+    }
+
+    return 0;
+}
+
+
+//Function Definitions
+void display()
+{
+    temp=head;
+    while (temp!=0)
+    {
+        printf("%d \n", temp->data);
+        temp=temp->next;
+    }
+}
+
+void delend()
+{
+    struct node *prevnode;
+    temp=head;
+    if(head==0)
+    {
+        printf("There is no node to be deleted\n");
+    }
+    else
+    {
+        while (temp->next!=0)
+        {
+            prevnode= temp;
+            temp=temp->next;
+        }
+        if (temp==head)
+        {
+            head=0;
+            free(temp);
+        }
+        else
+        {
+            prevnode->next=0;
+            free(temp);
+        }
+    }
