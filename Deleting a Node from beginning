@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Deleting a Node from beginning
+
+//Declaring what struct node contains
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *head;
+
+//Function Declarations
+void delfirst();
+void display();
+
+//Main Program
+int main()
+{
+    int choice=1, count=0;
+    struct node *temp, *newnode;
+    head=0;
+    temp=0;
+
+    while(choice)
+    {
+        newnode= (struct node*) malloc(sizeof(struct node));
+        printf("Enter data \n");
+        scanf("%d", &newnode->data);
+        newnode->next= 0;
+
+        if (head==0)
+        {
+            head = temp = newnode;
+        }
+
+        else
+        {
+            temp->next= newnode;
+            temp=newnode;
+        }
+        printf("Do you want to continue? (1)? \n");
+        scanf("%d", &choice);
+    }
+
+    delfirst();
+    display();
+
+
+    return 0;
+}
+
+
+//Function Definitions
+void delfirst()
+{
+    struct node *temp;
+    temp=head;
+    head=head->next;
+    free(temp);
+}
+
+void display()
+{
+    struct node *temp;
+    temp=head;
+    while (temp!=0)
+    {
+        printf("%d \n", temp->data);
+        temp=temp->next;
+    }
