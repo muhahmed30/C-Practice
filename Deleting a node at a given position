@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Deleting a node at a given position
+
+//Stating what a struct node contains
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+//Declaring temp and head as global variables
+struct node *temp, *head;
+
+//Function Declaration
+void display();
+void delpos();
+
+//Main Program
+int main()
+{
+    struct node *newnode;
+    int choice=1, count=0;
+    temp=0;
+    head=0;
+
+    while(choice)
+    {
+        newnode= (struct node*) malloc(sizeof(struct node));
+        printf("Enter data \n");
+        scanf("%d", &newnode->data);
+
+        if (head==0)
+        {
+            head=temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+        printf("Do you want to continue?\n");
+        scanf("%d", &choice);
+    }
+
+    //Calling the display function
+    display();
+
+    int a;
+    printf("Do you want to delete a node from a given position?\n");
+    scanf("%d", &a);
+
+    if (a==1)
+    {
+        delpos();
+        display(); 
+    }
+
+
+    return 0;
+}
+
+
+//Function Definitions
+void display()
+{
+    int count=0;
+    temp=head;
+    while (temp!=0)
+    {
+        printf("%d \n", temp->data);
+        temp=temp->next;
+    }
+}
+
+
+void delpos()
+{
+    int pos, i=1;
+    struct node *prevnode;
+    printf("Which position do you want to delete the node?\n");
+    scanf("%d", &pos);
+    temp=head;
+    while (i<pos)
+    {
+        prevnode=temp;
+        temp=temp->next;
+        i++;
+    }
+    prevnode->next=temp->next;
+    free(temp);
+}
