@@ -1,0 +1,192 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Insertion in a doubly linked list
+
+void create();
+void display();
+void atBeg();
+void atEnd();
+void pos();
+void afterPos();
+
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+
+struct node *temp, *head, *newNode;
+
+int main()
+{
+    create();
+    display();
+    int c;
+    printf("Press 1 for inserting at beginning, 2 for at the end, 3 for inserting at position, 4 to insert after given pos\n");
+    scanf("%d", &c);
+    switch (c)
+    {
+        case 1:
+        atBeg();
+        break;
+
+        case 2:
+        atEnd();
+        break;
+
+        case 3:
+        pos();
+        break;
+
+        case 4:
+        afterPos();
+        break;
+
+        default:
+        break;
+    }
+
+    return 0;
+}
+
+void create()
+{
+    int choice =1;
+    temp=0;
+    head=0;
+    while(choice)
+    {
+        newNode= (struct node*) malloc(sizeof(struct node));
+        printf("Enter data \n");
+        scanf("%d", &newNode->data);
+        newNode->next= 0;
+        newNode->prev= 0;
+
+        if (head == 0 )
+        {
+            head = temp = newNode;
+        }
+        else
+        {
+            temp->next = newNode;
+            newNode->prev= temp;
+            temp=newNode;
+        }
+        printf("Do you want to add another node? \n");
+        scanf("%d", &choice);
+    }
+}
+
+void display()
+{
+    temp=head;
+    while (temp!=0)
+    {
+        printf("%d \n", temp->data);
+        temp=temp->next;
+    }
+}
+
+void atBeg()
+{
+    newNode= (struct node*) malloc(sizeof(struct node));
+    printf("Enter data \n");
+    scanf("%d", &newNode->data);
+    newNode->next= 0;
+    newNode->prev= 0;
+
+    if (head == 0)
+    {
+        head = temp = newNode;
+    }
+    else
+    {
+        head->prev= newNode;
+        newNode->next = head;
+        head = newNode;
+    }
+    display();
+}
+
+void atEnd()
+{
+    newNode= (struct node*) malloc(sizeof(struct node));
+    printf("Enter data \n");
+    scanf("%d", &newNode->data);
+    newNode->next= 0;
+    newNode->prev= 0;
+
+    if (head==0)
+    {
+        head = temp = newNode;
+    }
+    else
+    {
+        temp = head;
+        while (temp->next!=0)
+        {
+            temp=temp->next;
+        }
+        temp->next= newNode;
+        newNode->prev= temp;
+        temp= newNode;
+    }
+    display();
+}
+
+void pos()
+{
+    int pos;
+    printf("Enter the position you want to insert at \n");
+    scanf("%d", &pos);
+    newNode= (struct node*) malloc(sizeof(struct node));
+    printf("Enter data \n");
+    scanf("%d", &newNode->data);
+    newNode->next= 0;
+    newNode->prev= 0;
+    temp = head;
+
+    int i =1;
+    while (i < pos-1)
+    {
+        temp=temp->next;
+        i++;
+    }
+
+    newNode->prev= temp;
+    newNode->next = temp->next;
+    temp->next = newNode;
+    temp->next->prev = newNode;
+
+    display();
+}
+
+void afterPos()
+{
+    int pos;
+    printf("Enter the position you want to insert after \n");
+    scanf("%d", &pos);
+    newNode= (struct node*) malloc(sizeof(struct node));
+    printf("Enter data \n");
+    scanf("%d", &newNode->data);
+    newNode->next= 0;
+    newNode->prev= 0;
+    temp = head;
+
+    int i =1;
+    while (i < pos)
+    {
+        temp=temp->next;
+        i++;
+    }
+
+    newNode->prev= temp;
+    newNode->next = temp->next;
+    temp->next->prev = newNode;
+    temp->next = newNode;
+
+    display();
+}
