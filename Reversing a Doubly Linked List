@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Reversing a Doubly Linked List
+
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+
+struct node *head, *temp, *nextNode, *newNode, *currentNode, *tail;
+
+void create();
+void display();
+void reverseDll();
+
+int main()
+{
+    create();
+    display();
+    reverseDll();
+
+    return 0;
+}
+
+void create()
+{
+    int choice =1;
+    head = 0;
+    temp = 0;
+    while(choice)
+    {
+        newNode = (struct node*) malloc(sizeof(struct node));
+        newNode->prev= 0;
+        newNode->next = 0;
+        printf("Enter Data \n");
+        scanf("%d", &newNode->data);
+
+        if (head == 0)
+        {
+            head = temp = newNode;
+        }
+        else
+        {
+            temp->next= newNode;
+            newNode->prev= temp;
+            temp= newNode;
+            tail= newNode;
+        }
+        printf("Do you want to add another node? \n");
+        scanf("%d", &choice);
+    }
+}
+
+void display()
+{
+    temp=head;
+    while (temp!=0)
+    {
+        printf("%d \n", temp->data);
+        temp= temp->next;
+    }
+}
+
+void reverseDll()
+{
+    int yes;
+    printf("Do you want to reverse doubly linked list? \n");
+    scanf("%d", &yes);
+    if (yes == 1)
+    {
+        currentNode= head;
+        while(currentNode!=0)
+        {
+            nextNode= currentNode->next;
+            currentNode->next = currentNode->prev;
+            currentNode->prev= nextNode;
+            currentNode= nextNode;
+        }
+        currentNode= head;
+        head = tail;
+        tail = currentNode;
+
+        display();
+    }
+}
