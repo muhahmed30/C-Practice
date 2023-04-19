@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Author: Muhammad Ahmed
+//Purpose: Creating a Circular Linked List
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head, *tail, *newNode, *temp;
+
+void create();
+void display();
+
+int main()
+{
+    create();
+    display();
+
+    return 0;
+}
+
+void create()
+{
+    int choice = 1;
+    head = 0;
+    temp = 0;
+
+    while(choice)
+    {
+        newNode= (struct node*) malloc(sizeof(struct node));
+        printf("Enter data \n");
+        scanf("%d", &newNode->data);
+        newNode->next = 0;
+
+        if (head == 0)
+        {
+            head = temp = newNode;
+        }
+        else
+        {
+            temp->next = newNode;
+            temp = newNode;
+        }
+        temp->next = head;
+        printf("Would you like to add another node?\n");
+        scanf("%d", &choice);
+    }
+}
+
+void display()
+{
+    temp = head;
+    while (temp->next!= head)
+    {
+        printf("%d \n", temp->data);
+        temp = temp->next;
+    }
+   printf("%d \n", temp->data);
+}
